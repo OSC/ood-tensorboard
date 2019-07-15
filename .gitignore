@@ -1,0 +1,5 @@
+
+*.log
+*.lock
+*.pyc
+.venv
