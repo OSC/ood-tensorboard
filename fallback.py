@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, redirect
 from form import TensorboardForm
 
 MyApp = Flask(__name__)
+MyApp.config['SECRET_KEY'] = "example"
 
 @MyApp.route('/', methods=['GET', 'POST'])
 def index():
