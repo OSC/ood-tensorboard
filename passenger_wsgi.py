@@ -45,7 +45,7 @@ FLAGS = tf.flags.FLAGS
 default_app = MyApp
 
 def make_app(displayLogDir):
-	return tensorboard.backend.backendWSGI.standard_tensorboard_wsgi(
+	return backendWSGI.standard_tensorboard_wsgi(
 		assets_zip_provider="",
 		db_uri="",
 		logdir=os.path.expanduser(displayLogDir),
