@@ -1,6 +1,6 @@
 from app import PathDispatcher
 from fallback import MyApp
-import tensorboard
+from tensorboard.backend import application as backendWSGI
 import tensorflow as tf
 
 tf.flags.DEFINE_boolean(
@@ -45,7 +45,7 @@ FLAGS = tf.flags.FLAGS
 default_app = MyApp
 
 def make_app(displayLogDir):
-	return tensorboard.backend.application.standard_tensorboard_wsgi(
+	return tensorboard.backend.backendWSGI.standard_tensorboard_wsgi(
 		assets_zip_provider="",
 		db_uri="",
 		logdir=os.path.expanduser(displayLogDir),
