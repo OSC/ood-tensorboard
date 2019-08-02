@@ -2,6 +2,7 @@ from app import PathDispatcher
 from fallback import MyApp
 from tensorboard.backend import application as backendWSGI
 import tensorflow as tf
+import os
 
 tf.flags.DEFINE_boolean(
     'purge_orphaned_data', True, 'Whether to purge data that '
