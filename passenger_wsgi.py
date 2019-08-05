@@ -13,7 +13,7 @@ def make_app(prefix):
 		assets_zip_provider=default.get_assets_zip_provider(),
 		db_uri="",
 		logdir=os.path.expanduser("/users/PZS0715/smansour/tensorboardTestbench/logs"),
-		purge_orphaned_data=true,
+		purge_orphaned_data="true",
 		reload_interval=5,
 		plugins=default.get_plugins(),
 		path_prefix="",
