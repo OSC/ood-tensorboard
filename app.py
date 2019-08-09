@@ -24,4 +24,4 @@ class PathDispatcher(object):
             app = self.default_app
         else:
             app = self.create_app
-        return app(environ, start_response)
+        return app(environ)
