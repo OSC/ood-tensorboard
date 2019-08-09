@@ -3,7 +3,6 @@ from form import TensorboardForm
 import os
 
 MyApp = Flask(__name__)
-MyApp.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 @MyApp.route('/', methods=['GET', 'POST'])
 def index():
