@@ -18,7 +18,7 @@ class PathDispatcher(object):
                     self.instances[prefix] = app
             return app
 
-    def __call__(self, environ, start_response):
+    def __call__(self, environ):
         app = self.get_application(peek_path_info(environ))
         if app is None:
             app = self.create_app
