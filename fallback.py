@@ -6,6 +6,7 @@ MyApp = Flask(__name__)
 
 @MyApp.route('/', methods=['GET', 'POST'])
 def index():
+	print("In default app")
 	form = TensorboardForm()
 	if form.validate_on_submit():
 		flash('Instance requested for log directory: {}'.format(form.logdir.data))
