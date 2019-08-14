@@ -6,7 +6,7 @@ import tensorflow as tf
 import os
 
 
-def make_app():
+def make_app(environ, start_response):
     
     return backendWSGI.standard_tensorboard_wsgi(
         assets_zip_provider=default.get_assets_zip_provider(),
