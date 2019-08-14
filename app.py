@@ -15,7 +15,7 @@ def make_app():
         purge_orphaned_data="",
         reload_interval=5,
         plugins=default.get_plugins(),
-        path_prefix=prefix,
+        path_prefix="",
         window_title="",
         max_reload_threads=1
         )
