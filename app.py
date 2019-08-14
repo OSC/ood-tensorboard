@@ -7,7 +7,7 @@ class PathDispatcher(object):
         self.default_app = default_app
         self.create_app = create_app
         self.lock = Lock()
-        self.instances = {}
+        self.instances = {"/": default_app}
 
     def get_application(self, prefix):
         with self.lock:
