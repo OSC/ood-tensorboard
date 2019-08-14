@@ -4,6 +4,9 @@ import os
 
 MyApp = Flask(__name__)
 
+SECRET_KEY = os.urandom(32)
+MyApp.config['SECRET_KEY'] = SECRET_KEY
+
 @MyApp.route('/', methods=['GET', 'POST'])
 def index():
 	print("In default app")
