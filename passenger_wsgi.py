@@ -9,6 +9,9 @@ import os
 default_app = MyApp
 
 def make_app(prefix):
+
+	print(prefix)
+
 	return backendWSGI.standard_tensorboard_wsgi(
 		assets_zip_provider=default.get_assets_zip_provider(),
 		db_uri="",
