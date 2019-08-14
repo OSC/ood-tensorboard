@@ -1,5 +1,6 @@
 from threading import Lock
 from werkzeug.wsgi import pop_path_info, peek_path_info
+from fallback import MyApp
 
 class PathDispatcher(object):
 
@@ -7,7 +8,7 @@ class PathDispatcher(object):
         self.default_app = default_app
         self.create_app = create_app
         self.lock = Lock()
-        self.instances = {}
+        self.instances = {"/": MyApp}
 
     def get_application(self, prefix):
         with self.lock:
