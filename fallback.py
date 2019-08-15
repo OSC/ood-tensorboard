@@ -6,6 +6,9 @@ MyApp = Flask(__name__)
 
 SECRET_KEY = os.urandom(32)
 MyApp.config['SECRET_KEY'] = SECRET_KEY
+MyApp.config['APPLICATION_ROOT'] = os.environ['PASSENGER_BASE_URI']
+
+print(os.environ)
 
 @MyApp.route('/', methods=['GET'])
 def index():
