@@ -4,8 +4,7 @@ import os
 
 MyApp = Flask(__name__)
 
-SECRET_KEY = os.urandom(32)
-MyApp.config['SECRET_KEY'] = SECRET_KEY
+MyApp.config['SECRET_KEY'] = os.environ['SECRET_KEY_BASE']
 MyApp.config['APPLICATION_ROOT'] = os.environ['PASSENGER_BASE_URI']
 
 print(os.environ)
