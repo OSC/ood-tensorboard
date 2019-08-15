@@ -9,15 +9,12 @@
 
 	{% block content %}
     <h1>Create A Tensorboard Instance</h1>
-    <form action="" method="post" novalidate>
+    <form action="/" method="get" novalidate>
         <p>
             {{ form.logdir.label }}<br>
             {{ form.logdir(size=100) }}
         </p>
-        <p>
-            {{ form.path.label }}<br>
-            {{ form.path(size=32) }}
-        </p>
+
         <p>{{ form.submit() }}</p>
     </form>
 {% endblock %}
