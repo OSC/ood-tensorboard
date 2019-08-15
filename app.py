@@ -4,24 +4,23 @@ from tensorboard.backend import application as backendWSGI
 from tensorboard import default
 import tensorflow as tf
 import os
+from tensorboard.backend import application
 
+def create_tb_app(plugins, assets_zip_provider, log='/users/PZS0715/smansour/TensorboardTestbench/logs/'):
 
-def make_app(environ, start_response):
-    
-    return backendWSGI.standard_tensorboard_wsgi(
-        assets_zip_provider=default.get_assets_zip_provider(),
-        db_uri="",
-        logdir="/users/PZS0715/smansour/tensorboardTestbench/logs",
-        purge_orphaned_data="",
-        reload_interval=5,
-        plugins=default.get_plugins(),
-        path_prefix="",
-        window_title="",
-        max_reload_threads=1
-        )
-
+  return application.standard_tensorboard_wsgi(
+      assets_zip_provider=assets_zip_provider,
+      db_uri='',
+      logdir=os.path.expanduser(log),
+      purge_orphaned_data=True,
+      reload_interval=5,
+      plugins=plugins,
+      path_prefix='',
+      window_title='',
+      max_reload_threads=1,
+      flags='')
 
 
 application = DispatcherMiddleware(MyApp, {
-    '/load': make_app     
+    '/load': create_tb_app(default.get_plugins(), default.get_assets_zip_provider(), )     
 })
