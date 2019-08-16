@@ -5,8 +5,9 @@ from tensorboard import default
 import tensorflow as tf
 import os
 from tensorboard.backend import application
+from flask import request
 
-def create_tb_app(plugins, assets_zip_provider, log='/users/PZS0715/smansour/TensorboardTestbench/logs/'):
+def create_tb_app(plugins, assets_zip_provider, log=request.get('logdir')):
 
   return application.standard_tensorboard_wsgi(
       assets_zip_provider=assets_zip_provider,
