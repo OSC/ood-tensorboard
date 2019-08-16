@@ -4,10 +4,13 @@ from tensorboard.backend import application as backendWSGI
 from tensorboard import default
 import tensorflow as tf
 import os
+from werkzeug.wsgi import get_query_string
 from tensorboard.backend import application
 from flask import request
 
-def create_tb_app(plugins, assets_zip_provider, log=request.get('logdir')):
+
+print(get_query_string(environ))
+def create_tb_app(plugins, assets_zip_provider, log="/users/PZS0715/smansour/TensorboardTestbench/logs/"):
 
   return application.standard_tensorboard_wsgi(
       assets_zip_provider=assets_zip_provider,
