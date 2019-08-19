@@ -9,7 +9,7 @@ from tensorboard.backend import application
 from flask import request
 
 
-print(get_query_string(environ))
+#print(get_query_string(environ))
 def create_tb_app(plugins, assets_zip_provider, log="/users/PZS0715/smansour/TensorboardTestbench/logs/"):
 
   return application.standard_tensorboard_wsgi(
