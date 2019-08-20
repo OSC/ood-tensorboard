@@ -1,5 +1,4 @@
 from werkzeug.wsgi import DispatcherMiddleware
-from fallback import MyApp
 from tensorboard.backend import application as backendWSGI
 from tensorboard import default
 import tensorflow as tf
@@ -10,9 +9,25 @@ from threading import Lock
 from werkzeug.wsgi import pop_path_info, peek_path_info
 from flask import Flask
 import pprint
+from flask import render_template, flash, redirect
+from form import TensorboardForm
 
+def create_default_app():
+    default_app = Flask(__name__)
 
-#print(get_query_string(environ))
+    default_app.config['SECRET_KEY'] = os.environ['SECRET_KEY_BASE']
+    default_app.config['APPLICATION_ROOT'] = os.environ['PASSENGER_BASE_URI']
+
+    @default_app.route('/', methods=['GET'])
+    def index():
+        form = TensorboardForm()
+        if form.validate_on_submit():
+            return redirect('/load/')
+
+        return render_template('index.html', title='Create A Tensorboard Instance', form=form)
+
+    return default_app
+
 def create_tb_app(log):
 
   return backendWSGI.standard_tensorboard_wsgi(
@@ -44,6 +59,8 @@ class PathDispatcher(object):
         else:
             my_app = self.default_app
         return my_app(environ, start_response)
+
+MyApp = create_default_app()
 
 application = DispatcherMiddleware(MyApp, {
     '/instances': PathDispatcher(MyApp, {
