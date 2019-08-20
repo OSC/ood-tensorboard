@@ -28,19 +28,6 @@ def create_tb_app(log):
       flags='')
 
 
-def create_dummy_app(details):
-  app = Flask(__name__, instance_relative_config=True)
-
-  @app.route('/')
-  def index():
-      return "<h2>" + ("/") + "</h2><pre>" + details + "</pre>"
-
-  @app.route('/<path:subpath>')
-  def index_with_subpath(subpath):
-      return "<h2>" + (subpath or "None") + "</h2><pre>" + details + "</pre>"
-
-  return app
-
 # path dispatcher will accept a reference to an instances map
 # but not be responsible for creating new apps
 
@@ -50,10 +37,7 @@ class PathDispatcher(object):
         self.instances = instances
 
     def __call__(self, environ, start_response):
-        # my_app = pprint.pformat(self.instances.get(peek_path_info(environ)))
-        my_app = create_dummy_app(pprint.pformat(self.instances) +
-                                  "\n\npeek_path_info: " +
-                                  peek_path_info(environ) + "\n\napp found:" + pprint.pformat(self.instances.get(peek_path_info(environ))))
+        my_app = self.instances.get(peek_path_info(environ))
 
         if my_app is not None:
             pop_path_info(environ)
