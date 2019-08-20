@@ -26,5 +26,5 @@ def create_tb_app(plugins, assets_zip_provider, log="/users/PZS0715/smansour/Ten
 
 
 application = DispatcherMiddleware(MyApp, {
-    '/load': create_tb_app(default.get_plugins(), default.get_assets_zip_provider(), )     
+    '/load': create_tb_app(default.get_plugins(), default.get_assets_zip_provider(), )
 })
