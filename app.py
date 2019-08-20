@@ -12,6 +12,8 @@ import pprint
 from flask import render_template, flash, redirect
 from form import TensorboardForm
 
+instances = {}
+
 def create_default_app():
     default_app = Flask(__name__)
 
@@ -25,6 +27,13 @@ def create_default_app():
             return redirect('/load/')
 
         return render_template('index.html', title='Create A Tensorboard Instance', form=form)
+
+    @default_app.route('/load', methods=['GET'])
+    def load():
+        instances['one'] = create_tb_app("/users/PZS0715/smansour/TensorboardTestbench/logs/")
+        instances['two'] = create_tb_app("/users/PZS0562/efranz/tmp/TensorboardTestbench/logs/")
+
+        return redirect('/pun/dev/tensor/instances/one/')
 
     return default_app
 
@@ -45,6 +54,7 @@ def create_tb_app(log):
 
 # path dispatcher will accept a reference to an instances map
 # but not be responsible for creating new apps
+# at this poin
 
 class PathDispatcher(object):
     def __init__(self, default_app, instances):
@@ -63,8 +73,5 @@ class PathDispatcher(object):
 MyApp = create_default_app()
 
 application = DispatcherMiddleware(MyApp, {
-    '/instances': PathDispatcher(MyApp, {
-        'one': create_tb_app("/users/PZS0715/smansour/TensorboardTestbench/logs/"),
-        'two': create_tb_app("/users/PZS0562/efranz/tmp/TensorboardTestbench/logs/")
-    })
+    '/instances': PathDispatcher(MyApp, instances)
 })
