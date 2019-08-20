@@ -26,5 +26,6 @@ def create_tb_app(log):
 
 
 application = DispatcherMiddleware(MyApp, {
-    '/load': create_tb_app("/users/PZS0715/smansour/TensorboardTestbench/logs/")
+    '/one': create_tb_app("/users/PZS0715/smansour/TensorboardTestbench/logs/"),
+    '/two': create_tb_app("/users/PZS0562/efranz/tmp/TensorboardTestbench/logs/")
 })
