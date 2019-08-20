@@ -11,6 +11,7 @@ from flask import Flask
 import pprint
 from flask import render_template, flash, redirect
 from form import TensorboardForm
+import uuid
 
 instances = {}
 
@@ -30,10 +31,11 @@ def create_default_app():
 
     @default_app.route('/load', methods=['GET'])
     def load():
-        instances['one'] = create_tb_app("/users/PZS0715/smansour/TensorboardTestbench/logs/")
-        instances['two'] = create_tb_app("/users/PZS0562/efranz/tmp/TensorboardTestbench/logs/")
+        key = str(uuid.uuid4())
 
-        return redirect('/pun/dev/tensor/instances/one/')
+        instances[key] = create_tb_app(request.args.get("dir"))
+
+        return redirect('/pun/dev/tensor/instances/' + key + '/')
 
     return default_app
 
