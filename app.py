@@ -10,15 +10,15 @@ from flask import request
 
 
 #print(get_query_string(environ))
-def create_tb_app(plugins, assets_zip_provider, log="/users/PZS0715/smansour/TensorboardTestbench/logs/"):
+def create_tb_app(log):
 
   return application.standard_tensorboard_wsgi(
-      assets_zip_provider=assets_zip_provider,
+      assets_zip_provider=default.get_assets_zip_provider(),
       db_uri='',
       logdir=os.path.expanduser(log),
       purge_orphaned_data=True,
       reload_interval=5,
-      plugins=plugins,
+      plugins=default.get_plugins(),
       path_prefix='',
       window_title='',
       max_reload_threads=1,
@@ -26,5 +26,5 @@ def create_tb_app(plugins, assets_zip_provider, log="/users/PZS0715/smansour/Ten
 
 
 application = DispatcherMiddleware(MyApp, {
-    '/load': create_tb_app(default.get_plugins(), default.get_assets_zip_provider(), )
+    '/load': create_tb_app("/users/PZS0715/smansour/TensorboardTestbench/logs/")
 })
