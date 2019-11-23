@@ -3,25 +3,40 @@
 
 <head>
     <title>Tensorboard Launch</title>
+    <!-- FIXME: using CDN for assets  -->
+    <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+    <script src="/pun/dev/tensor/file_picker.js"></script>
 </head>
 
 <body>
 
+<div class="container">
 	{% block content %}
-    <h1>Create A Tensorboard Instance</h1>
-    <form action="./tensor/load/" method="get" novalidate>
+    <h1>Open logs in TensorBoard</h1>
+    <form action="load" method="get" novalidate>
         <p>
             {{ form.logdir.label }}<br>
-            {{ form.logdir(size=100) }}
+            {{ form.logdir(size=100, data_filepicker=True, data_target_file_type='dirs') }}
         </p>
 
-        <p>{{ form.submit() }}</p>
+        <p>{{ form.submit(class="btn btn-primary") }}</p>
     </form>
 {% endblock %}
 
-<a href="/pun/dev/tensor/load?dir=/users/PZS0715/smansour/TensorboardTestbench/logs/">Load One</a> |
-<a href="/pun/dev/tensor/load?dir=/users/PZS0562/efranz/tmp/TensorboardTestbench/logs/">Load Two</a>
-
+</div>
 
 </body>
 

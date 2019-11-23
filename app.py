@@ -24,6 +24,11 @@ def create_default_app():
     @default_app.route('/', methods=['GET'])
     def index():
         form = TensorboardForm()
+
+        #FIXME: we don't properly handle this
+        # instead we modified the target of the form directly
+        # to be /load
+        # instead we would redirect to /load with the get param passed through
         if form.validate_on_submit():
             return redirect('/load/')
 
@@ -33,7 +38,7 @@ def create_default_app():
     def load():
         key = str(uuid.uuid4())
 
-        instances[key] = create_tb_app(request.args.get("dir"))
+        instances[key] = create_tb_app(request.args.get("logdir"))
 
         return redirect('/pun/dev/tensor/instances/' + key + '/')
 
